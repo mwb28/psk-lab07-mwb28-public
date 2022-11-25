@@ -109,9 +109,9 @@ def counter(breite : float, reverse : bool)-> Grafik:
 
 
 
-# speichere_gif("counterdown",counter(30,True),500)
+speichere_gif("counterdown",counter(30,True),500)
 
-# zeige_grafik(zeichne_ziffer(30,"-8"))
+zeige_grafik(zeichne_ziffer(30,"-8"))
 
 
     
