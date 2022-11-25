@@ -111,7 +111,7 @@ def kreuzung(noppengroesse: float)-> Grafik:
     return neben(elemnete_links,neben(elemente_mitte,drehe(180,elemnete_links)))
 
 def alle_strassen_elemente(noppengroesse : float,) -> dict[Grafik]:
-    strassen_elemente = {
+    strassen_elemente : dict[Grafik] = {
         "gruenes_feld"      : gruen_grundflaeche(noppengroesse),
         "gerade_horizontal" : gerade(noppengroesse, "horizontal"),
         "gerade_vertikal"   : gerade(noppengroesse, "vertikal"),
@@ -145,7 +145,7 @@ def zeichne_rundkurs(noppengroesse: float)->Grafik:
     """
     alle_strassen_teile : dict[Grafik] = alle_strassen_elemente(noppengroesse)
 
-    gesamte_liste =[[
+    gesamte_liste : list[Grafik] =[[
         # erste Zeile
          alle_strassen_teile["gruenes_feld"],
          alle_strassen_teile["kurve_rechts_unten"],
@@ -193,10 +193,3 @@ def zeichne_rundkurs(noppengroesse: float)->Grafik:
     return gesamte_grafik
 
 speichere_grafik("rundkurs",zeichne_rundkurs(20))
-
-
-
-
-
-
-# zeige_grafik(alle_elemente_zeichen(alle_strassen_elemente(10)))
