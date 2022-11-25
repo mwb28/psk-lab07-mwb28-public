@@ -29,4 +29,4 @@ def augen(durchmesser: float, farbe: Farbe) -> Grafik:
 def augenfarbe(rot: int, gruen: int, blau : int)-> Farbe:
     return rgb_farbe(rot,gruen, blau)
 
-zeige_grafik(augen(200, augenfarbe(100,50,25)))
+zeige_grafik(augen(200, augenfarbe(255,255,0)))

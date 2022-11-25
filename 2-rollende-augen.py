@@ -37,4 +37,4 @@ def rollende_augen_frames(durchmesser : float, farbe: Farbe)-> list[Grafik]:
         list_augen.append(augen(durchmesser,winkel,farbe))
     return list_augen
 
-speichere_gif("rollende-augen",rollende_augen_frames(200,augenfarbe(100,50,25)),20)
+speichere_gif("rollende-augen",rollende_augen_frames(200,augenfarbe(255,255,0)),30)

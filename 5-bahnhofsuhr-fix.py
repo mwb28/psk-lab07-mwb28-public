@@ -140,6 +140,6 @@ def animierte_uhr ()-> list[Grafik]:
   return list_uhr
 
 
-speichere_gif("around_the_clock",animierte_uhr(),50)
+# speichere_gif("around_the_clock",animierte_uhr(),50)
 
-zeige_grafik(zeichne_uhrzeit(5,1,15))
+zeige_grafik(zeichne_uhrzeit(4,30,45))

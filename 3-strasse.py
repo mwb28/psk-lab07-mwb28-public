@@ -15,6 +15,7 @@ STRASSEN_FARBE : Farbe = rgb_farbe(140, 140, 140)
 RANDSTREIFEN_FARBE : Farbe= gelb
 MITTELSTREIFEN_FARBE : Farbe = weiss
 
+
 def gruen_grundflaeche(noppengroesse: float,)-> Grafik:
     return rechteck(noppengroesse*32,noppengroesse *32,RASEN_FARBE)
 
@@ -109,7 +110,93 @@ def kreuzung(noppengroesse: float)-> Grafik:
     elemente_mitte : Grafik  = ueber(mitte_fussgaenger_oben, ueber(kreuzung_mitte,mitte_fussgaenger_unten))
     return neben(elemnete_links,neben(elemente_mitte,drehe(180,elemnete_links)))
 
-zeige_grafik(gerade(10,"horizontal"))
-zeige_grafik(kurve(10,90))
-zeige_grafik(kreuzung(10))
-zeige_grafik(abzweigung(10,"links"))      
+def alle_strassen_elemente(noppengroesse : float,) -> dict[Grafik]:
+    strassen_elemente = {
+        "gruenes_feld"      : gruen_grundflaeche(noppengroesse),
+        "gerade_horizontal" : gerade(noppengroesse, "horizontal"),
+        "gerade_vertikal"   : gerade(noppengroesse, "vertikal"),
+        "kurve_li_oben"     : kurve(noppengroesse, 0),
+        "kurve_oben_rechts" : kurve(noppengroesse,270),
+        "kurve_rechts_unten": kurve(noppengroesse,180),
+        "kurve_unten_links" : kurve(noppengroesse,90),
+        "abzweigung_links"  : abzweigung(noppengroesse,"links"),
+        "abzweigung_oben"   : abzweigung(noppengroesse, "oben"),
+        "abzweigung_rechts" : abzweigung(noppengroesse,"rechts"),
+        "abzweiung_unten"   : abzweigung(noppengroesse,"unten"),
+        "kreuzung"          : kreuzung(noppengroesse),
+    }
+    return strassen_elemente
+
+
+
+def alle_elemente_zeichen(alle : dict)-> Grafik:
+    alle_elemente = leere_grafik()
+    for value in alle.values():
+        alle_elemente = neben(alle_elemente,value)
+    return alle_elemente
+
+def zeichne_rundkurs(noppengroesse: float)->Grafik:
+    """
+    Anmerkung: Eigentlich könnte man dies mit einer Wave Collapse function
+    herstellen, aber in pytamaro ist es leider etwas umständlich, ein Muster
+    zu erstellen... würde ev. schon gehen, hatte leider 
+    keine Muse dazu... hier ist nun eine einfache hardcoded 
+    Version.
+    """
+    alle_strassen_teile : dict[Grafik] = alle_strassen_elemente(noppengroesse)
+
+    gesamte_liste =[[
+        # erste Zeile
+         alle_strassen_teile["gruenes_feld"],
+         alle_strassen_teile["kurve_rechts_unten"],
+         alle_strassen_teile["abzweiung_unten"],
+         alle_strassen_teile["abzweiung_unten"],
+         alle_strassen_teile["gerade_horizontal"],
+         alle_strassen_teile["kurve_unten_links"]
+    ],
+    [ # zweite Zeile
+         alle_strassen_teile["kurve_rechts_unten"],
+         alle_strassen_teile["abzweigung_oben"],
+         alle_strassen_teile["kreuzung"],
+         alle_strassen_teile["abzweigung_links"],
+         alle_strassen_teile["gruenes_feld"],
+         alle_strassen_teile["gerade_vertikal"] 
+    ],
+     [ # dritte Zeile
+         alle_strassen_teile["gerade_vertikal"],
+         alle_strassen_teile["gruenes_feld"],
+         alle_strassen_teile["gerade_vertikal"],
+         alle_strassen_teile["abzweigung_rechts"],
+         alle_strassen_teile["gerade_horizontal"],
+         alle_strassen_teile["kurve_li_oben"] 
+    ],
+    [ # vierte Zeile
+         alle_strassen_teile["kurve_oben_rechts"],
+         alle_strassen_teile["gerade_horizontal"],
+         alle_strassen_teile["abzweigung_oben"],
+         alle_strassen_teile["kurve_li_oben"],
+         alle_strassen_teile["gruenes_feld"],
+         alle_strassen_teile["gruenes_feld"] 
+    ]]
+    zeile_grafik = leere_grafik()
+    gesamte_grafik= leere_grafik()
+    for i in range(4):
+       for j in range (6):
+            zeile_grafik = neben(zeile_grafik,gesamte_liste[i][j])
+       gesamte_grafik = ueber(gesamte_grafik,zeile_grafik)
+       zeile_grafik = leere_grafik()
+        
+       
+    
+        
+    
+    return gesamte_grafik
+
+speichere_grafik("rundkurs",zeichne_rundkurs(20))
+
+
+
+
+
+
+# zeige_grafik(alle_elemente_zeichen(alle_strassen_elemente(10)))
