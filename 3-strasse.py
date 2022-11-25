@@ -137,9 +137,9 @@ def alle_elemente_zeichen(alle : dict)-> Grafik:
 
 def zeichne_rundkurs(noppengroesse: float)->Grafik:
     """
-    Anmerkung: Eigentlich könnte man dies mit einer Wave Collapse function
-    herstellen, aber in pytamaro ist es leider etwas umständlich, ein Muster
-    zu erstellen... würde ev. schon gehen, hatte leider 
+    Anmerkung: Eigentlich könnte man dies mit Wave Function Collapse
+    herstellen, aber in pytamaro ist es leider etwas umständlich, 
+    ... würde ev. schon gehen, hatte leider 
     keine Muse dazu... hier ist nun eine einfache hardcoded 
     Version.
     """
